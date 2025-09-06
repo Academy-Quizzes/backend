@@ -1,7 +1,7 @@
 package com.reactkotlin.quiz.backend.entity
 
-import com.reactkotlin.quiz.backend.dto.QuizReq
-import com.reactkotlin.quiz.backend.dto.QuizRes
+import com.reactkotlin.quiz.backend.dto.QuizResFull
+import com.reactkotlin.quiz.backend.dto.QuizResWithoutAnswer
 
 class Quiz(
     val id: Int,
@@ -18,9 +18,14 @@ class Quiz(
             return Quiz(id = counter, title = title, text = text, options = options, answer = answer)
         }
     }
+
+    fun checkAnswer(submittedAnswer: List<Int>): Boolean {
+        return submittedAnswer.sorted() == answer.sorted()
+    }
 }
 
-fun Quiz.toRes() = QuizRes(id,title, text, options)
+fun Quiz.toResWithoutAnswer() = QuizResWithoutAnswer(id,title, text, options)
+fun Quiz.toResFull()= QuizResFull(id,title, text, options, answer)
 
 
 
