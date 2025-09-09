@@ -11,5 +11,5 @@ interface QuizRepository {
 
     fun deleteById(id: Int)
 
-    fun update(quiz: Quiz)
+    fun update(quiz: Quiz):Quiz
 }

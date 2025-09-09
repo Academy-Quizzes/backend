@@ -23,8 +23,9 @@ class InMemoryQuizRepositoryImpl(private val quizzesDB: FakeQuizDB = FakeQuizDB(
        quizzesDB.deleteQuiz(id)
     }
 
-    override fun update(quiz: Quiz) {
+    override fun update(quiz: Quiz): Quiz {
         quizzesDB.updateQuiz(quiz)
+        return quizzesDB.getQuiz(quiz.id)!!
     }
 }
 
