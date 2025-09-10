@@ -15,4 +15,6 @@ class QuizController(private val quizService: QuizService) {
     fun getQuizzes(): List<QuizRes> {
         return quizService.getAll()
     }
+
+
 }

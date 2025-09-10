@@ -4,6 +4,7 @@ import com.reactkotlin.quiz.backend.dto.QuizReq
 import com.reactkotlin.quiz.backend.dto.QuizRes
 
 interface QuizService {
+
     fun getAll(): List<QuizRes>
 
     fun getById(id: Int): QuizRes
@@ -13,4 +14,5 @@ interface QuizService {
     fun update(quizId: Int, quiz: QuizReq): QuizRes
 
     fun delete(id: Int)
+
 }
