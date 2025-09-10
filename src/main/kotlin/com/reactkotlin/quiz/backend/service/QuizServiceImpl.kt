@@ -16,8 +16,11 @@ class QuizServiceImpl(private val quizRepository: QuizRepository) : QuizService 
         return quizRepository.findAll().map { it.toQuizRes() }
     }
 
+
     override fun getById(id: Int): QuizRes {
-        TODO("Not yet implemented")
+        return quizRepository.findById(id)?.toQuizRes()
+            ?: throw IllegalArgumentException("Quiz with id=${id} not found")
+
     }
 
     override fun add(quiz: QuizReq) {
