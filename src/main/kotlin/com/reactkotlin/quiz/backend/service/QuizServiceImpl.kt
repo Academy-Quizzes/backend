@@ -1,5 +1,6 @@
 package com.reactkotlin.quiz.backend.service
 
+import com.reactkotlin.quiz.backend.dto.QuizAnswerRes
 import com.reactkotlin.quiz.backend.dto.QuizReq
 import com.reactkotlin.quiz.backend.dto.QuizRes
 import com.reactkotlin.quiz.backend.mapper.toQuizFullRes
@@ -13,6 +14,10 @@ import org.springframework.stereotype.Service
 @Service
 class QuizServiceImpl(private val quizRepository: QuizRepository) : QuizService {
 
+    companion object {
+        const val QUIZ_CORRECT_MESSAGE = "Congratulations, you're right!"
+        const val QUIZ_WRONG_MESSAGE = "Wrong answer! Please, try again."
+    }
 
     override fun getAll(): List<QuizRes> {
         return quizRepository.findAll().map { it.toQuizRes() }
@@ -52,4 +57,27 @@ class QuizServiceImpl(private val quizRepository: QuizRepository) : QuizService 
 
         TODO("Not yet implemented")
     }
+
+    override fun solve(
+        id: Int,
+        userAnswer: List<Int>
+    ): QuizAnswerRes {
+        val quiz = quizRepository.findById(id) ?: throw IllegalArgumentException("Quiz with id=${id} not found")
+
+        val isCorrect = isQuizSolved(quiz, userAnswer)
+
+        return if (isCorrect) {
+            QuizAnswerRes(true, QUIZ_CORRECT_MESSAGE)
+        } else {
+            QuizAnswerRes(false, QUIZ_WRONG_MESSAGE)
+        }
+
+    }
+
+
+    private fun isQuizSolved(quiz: Quiz, userAnswer: List<Int>): Boolean {
+
+        return userAnswer.sorted() == quiz.answers.sorted()
+    }
+
 }
