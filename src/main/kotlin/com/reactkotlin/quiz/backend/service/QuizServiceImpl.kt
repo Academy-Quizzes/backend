@@ -44,16 +44,29 @@ class QuizServiceImpl(private val quizRepository: QuizRepository) : QuizService 
 
     }
 
-    override fun update(
 
+    @Transactional
+    override fun update(
         quizId: Int,
         quiz: QuizReq
-    ): QuizRes {
-        TODO("Not yet implemented")
+    ){
+        val getQuiz = quizRepository.findById(quizId)
+            ?: throw IllegalArgumentException("Quiz with id=${quizId} not found")
+
+        getQuiz.title = quiz.title
+        getQuiz.text = quiz.text
+        getQuiz.options = quiz.options
+        getQuiz.answers = quiz.answers
+
+      quizRepository.update(getQuiz)
+
     }
 
 
+
+    @Transactional
     override fun delete(id: Int) {
+
         quizRepository.findById(id)
             ?: throw IllegalArgumentException("Quiz with id=${id} not found")
 
@@ -61,7 +74,10 @@ class QuizServiceImpl(private val quizRepository: QuizRepository) : QuizService 
 
     }
 
+
+
     override fun solve(
+
         id: Int,
         userAnswers: List<Int>
     ): QuizAnswerRes {

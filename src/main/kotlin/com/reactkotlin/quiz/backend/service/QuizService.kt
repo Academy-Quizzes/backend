@@ -13,7 +13,7 @@ interface QuizService {
 
     fun add(quiz: QuizReq): QuizResFull
 
-    fun update(quizId: Int, quiz: QuizReq): QuizRes
+    fun update(quizId: Int, quiz: QuizReq)
 
     fun delete(id: Int)
 
