@@ -10,13 +10,9 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/api")
 class QuizController(private val quizService: QuizService) {
 
-    @GetMapping("/")
-    fun init():String{
-        return "Web quiz starter"
-    }
 
     @GetMapping("/quizzes")
     fun getQuizzes(): List<QuizRes> {
-        return quizService.getAllQuizzes()
+        return quizService.getAll()
     }
 }

@@ -25,5 +25,3 @@ class Quiz(
     }
 
 }
-
-fun Quiz.toRes() = QuizRes(id, title, text, options)
