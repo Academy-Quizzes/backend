@@ -1,5 +1,6 @@
 package com.reactkotlin.quiz.backend.service
 
+import com.reactkotlin.quiz.backend.dto.QuizAnswerRes
 import com.reactkotlin.quiz.backend.dto.QuizReq
 import com.reactkotlin.quiz.backend.dto.QuizRes
 import com.reactkotlin.quiz.backend.dto.QuizResFull
@@ -15,5 +16,7 @@ interface QuizService {
     fun update(quizId: Int, quiz: QuizReq): QuizRes
 
     fun delete(id: Int)
+
+    fun solve(id: Int, userAnswer: List<Int>): QuizAnswerRes
 
 }

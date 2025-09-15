@@ -1,5 +1,7 @@
 package com.reactkotlin.quiz.backend.controller
 
+import com.reactkotlin.quiz.backend.dto.QuizAnswerReq
+import com.reactkotlin.quiz.backend.dto.QuizAnswerRes
 import com.reactkotlin.quiz.backend.dto.QuizReq
 import com.reactkotlin.quiz.backend.dto.QuizRes
 import com.reactkotlin.quiz.backend.dto.QuizResFull
@@ -42,6 +44,16 @@ class QuizController(private val quizService: QuizService) {
         } catch (e: IllegalArgumentException) {
             ResponseEntity.badRequest().build()
         }
+    }
+
+
+    @PostMapping("/quizzes/{quizId}/solve")
+    fun solveQuiz(@PathVariable quizId: Int, @RequestBody quizAnswer: QuizAnswerReq): ResponseEntity<QuizAnswerRes> {
+
+        val answer = quizService.solve(quizId, quizAnswer.answers)
+
+        return ResponseEntity.status(HttpStatus.OK).body(answer)
+
     }
 
 }
