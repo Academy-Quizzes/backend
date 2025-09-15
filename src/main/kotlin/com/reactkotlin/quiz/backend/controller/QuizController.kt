@@ -9,6 +9,7 @@ import com.reactkotlin.quiz.backend.service.QuizService
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -54,6 +55,19 @@ class QuizController(private val quizService: QuizService) {
 
         return ResponseEntity.status(HttpStatus.OK).body(answer)
 
+    }
+
+    @DeleteMapping("/quizzes/{quizId}")
+    fun deleteQuiz(@PathVariable quizId: Int): ResponseEntity<Unit> {
+
+        return try {
+
+            quizService.delete(quizId)
+
+            ResponseEntity.noContent().build()
+        } catch (e: IllegalArgumentException) {
+            ResponseEntity.notFound().build()
+        }
     }
 
 }

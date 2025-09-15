@@ -54,17 +54,20 @@ class QuizServiceImpl(private val quizRepository: QuizRepository) : QuizService 
 
 
     override fun delete(id: Int) {
+        quizRepository.findById(id)
+            ?: throw IllegalArgumentException("Quiz with id=${id} not found")
 
-        TODO("Not yet implemented")
+        quizRepository.deleteById(id)
+
     }
 
     override fun solve(
         id: Int,
-        userAnswer: List<Int>
+        userAnswers: List<Int>
     ): QuizAnswerRes {
         val quiz = quizRepository.findById(id) ?: throw IllegalArgumentException("Quiz with id=${id} not found")
 
-        val isCorrect = isQuizSolved(quiz, userAnswer)
+        val isCorrect = isQuizSolved(quiz, userAnswers)
 
         return if (isCorrect) {
             QuizAnswerRes(true, QUIZ_CORRECT_MESSAGE)
@@ -75,9 +78,9 @@ class QuizServiceImpl(private val quizRepository: QuizRepository) : QuizService 
     }
 
 
-    private fun isQuizSolved(quiz: Quiz, userAnswer: List<Int>): Boolean {
+    private fun isQuizSolved(quiz: Quiz, userAnswers: List<Int>): Boolean {
 
-        return userAnswer.sorted() == quiz.answers.sorted()
+        return userAnswers.sorted() == quiz.answers.sorted()
     }
 
 }

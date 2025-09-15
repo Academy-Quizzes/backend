@@ -17,6 +17,6 @@ interface QuizService {
 
     fun delete(id: Int)
 
-    fun solve(id: Int, userAnswer: List<Int>): QuizAnswerRes
+    fun solve(id: Int, userAnswers: List<Int>): QuizAnswerRes
 
 }
