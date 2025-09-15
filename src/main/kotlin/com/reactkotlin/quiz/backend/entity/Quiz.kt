@@ -1,5 +1,7 @@
 package com.reactkotlin.quiz.backend.entity
 
+import com.reactkotlin.quiz.backend.dto.QuizRes
+
 class Quiz(
     val id: Int,
     var title: String,
