@@ -2,6 +2,7 @@ package com.reactkotlin.quiz.backend.service
 
 import com.reactkotlin.quiz.backend.dto.QuizReq
 import com.reactkotlin.quiz.backend.dto.QuizRes
+import com.reactkotlin.quiz.backend.dto.QuizResFull
 
 interface QuizService {
 
@@ -9,7 +10,7 @@ interface QuizService {
 
     fun getById(id: Int): QuizRes
 
-    fun add(quiz: QuizReq)
+    fun add(quiz: QuizReq): QuizResFull
 
     fun update(quizId: Int, quiz: QuizReq): QuizRes
 
