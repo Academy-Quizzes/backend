@@ -9,14 +9,14 @@ interface QuizService {
 
     fun getAll(): List<QuizRes>
 
-    fun getById(id: Int): QuizRes
+    fun getById(id: Long): QuizRes
 
     fun add(quiz: QuizReq): QuizResFull
 
-    fun update(quizId: Int, quiz: QuizReq)
+    fun update(quizId: Long, quiz: QuizReq)
 
-    fun delete(id: Int)
+    fun delete(id: Long)
 
-    fun solve(id: Int, userAnswers: List<Int>): QuizAnswerRes
+    fun solve(id: Long, userAnswers: List<Int>): QuizAnswerRes
 
 }
