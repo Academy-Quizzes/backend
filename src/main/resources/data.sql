@@ -4,139 +4,140 @@ TRUNCATE TABLE quiz_options, quiz_answers, quiz RESTART IDENTITY CASCADE;
 INSERT INTO quiz (title, text)
 VALUES ('Kotlin Variable Declaration', 'How do you declare a read-only integer variable in Kotlin?');
 INSERT INTO quiz_options (quiz_id, options)
-VALUES (1, 'val x: Int = 5');
+VALUES (currval(pg_get_serial_sequence('quiz', 'id')), 'val x: Int = 5');
 INSERT INTO quiz_options (quiz_id, options)
-VALUES (1, 'var x: Int = 5');
+VALUES (currval(pg_get_serial_sequence('quiz', 'id')), 'var x: Int = 5');
 INSERT INTO quiz_options (quiz_id, options)
-VALUES (1, 'int x = 5');
+VALUES (currval(pg_get_serial_sequence('quiz', 'id')), 'int x = 5');
 INSERT INTO quiz_options (quiz_id, options)
-VALUES (1, 'const x = 5');
+VALUES (currval(pg_get_serial_sequence('quiz', 'id')), 'const x = 5');
 INSERT INTO quiz_answers (quiz_id, answers)
-VALUES (1, 0);
+VALUES (currval(pg_get_serial_sequence('quiz', 'id')), 0);
 
 -- kotlin null safety
 INSERT INTO quiz (title, text)
 VALUES ('Kotlin Null Safety', 'Which operator is used to safely access a nullable variable in Kotlin?');
 INSERT INTO quiz_options (quiz_id, options)
-VALUES (2, '?.');
+VALUES (currval(pg_get_serial_sequence('quiz', 'id')), '?.');
 INSERT INTO quiz_options (quiz_id, options)
-VALUES (2, '!!');
+VALUES (currval(pg_get_serial_sequence('quiz', 'id')), '!!');
 INSERT INTO quiz_options (quiz_id, options)
-VALUES (2, '?:');
+VALUES (currval(pg_get_serial_sequence('quiz', 'id')), '?:');
 INSERT INTO quiz_options (quiz_id, options)
-VALUES (2, '.');
+VALUES (currval(pg_get_serial_sequence('quiz', 'id')), '.');
 INSERT INTO quiz_answers (quiz_id, answers)
-VALUES (2, 0);
+VALUES (currval(pg_get_serial_sequence('quiz', 'id')), 0);
 
 -- kotlin data classes
 INSERT INTO quiz (title, text)
 VALUES ('Kotlin Data Classes', 'What is automatically provided by a Kotlin data class?');
 INSERT INTO quiz_options (quiz_id, options)
-VALUES (3, 'toString()');
+VALUES (currval(pg_get_serial_sequence('quiz', 'id')), 'toString()');
 INSERT INTO quiz_options (quiz_id, options)
-VALUES (3, 'main()');
+VALUES (currval(pg_get_serial_sequence('quiz', 'id')), 'main()');
 INSERT INTO quiz_options (quiz_id, options)
-VALUES (3, 'equals() and hashCode()');
+VALUES (currval(pg_get_serial_sequence('quiz', 'id')), 'equals() and hashCode()');
 INSERT INTO quiz_options (quiz_id, options)
-VALUES (3, 'finalize()');
+VALUES (currval(pg_get_serial_sequence('quiz', 'id')), 'finalize()');
 INSERT INTO quiz_answers (quiz_id, answers)
-VALUES (3, 0);
+VALUES (currval(pg_get_serial_sequence('quiz', 'id')), 0);
 INSERT INTO quiz_answers (quiz_id, answers)
-VALUES (3, 2);
+VALUES (currval(pg_get_serial_sequence('quiz', 'id')), 2);
 
 -- kotlin functions
 INSERT INTO quiz (title, text)
 VALUES ('Kotlin Functions', 'Which keyword defines a function in Kotlin?');
 INSERT INTO quiz_options (quiz_id, options)
-VALUES (4, 'fun');
+VALUES (currval(pg_get_serial_sequence('quiz', 'id')), 'fun');
 INSERT INTO quiz_options (quiz_id, options)
-VALUES (4, 'function');
+VALUES (currval(pg_get_serial_sequence('quiz', 'id')), 'function');
 INSERT INTO quiz_options (quiz_id, options)
-VALUES (4, 'def');
+VALUES (currval(pg_get_serial_sequence('quiz', 'id')), 'def');
 INSERT INTO quiz_options (quiz_id, options)
-VALUES (4, 'method');
+VALUES (currval(pg_get_serial_sequence('quiz', 'id')), 'method');
 INSERT INTO quiz_answers (quiz_id, answers)
-VALUES (4, 0);
+VALUES (currval(pg_get_serial_sequence('quiz', 'id')), 0);
 
 -- kotlin loops
 INSERT INTO quiz (title, text)
 VALUES ('Kotlin Loops', 'Which Kotlin loop construct is best for iterating over a list with indices?');
 INSERT INTO quiz_options (quiz_id, options)
-VALUES (5, 'for (item in list)');
+VALUES (currval(pg_get_serial_sequence('quiz', 'id')), 'for (item in list)');
 INSERT INTO quiz_options (quiz_id, options)
-VALUES (5, 'for (i in list.indices)');
+VALUES (currval(pg_get_serial_sequence('quiz', 'id')), 'for (i in list.indices)');
 INSERT INTO quiz_options (quiz_id, options)
-VALUES (5, 'while (item in list)');
+VALUES (currval(pg_get_serial_sequence('quiz', 'id')), 'while (item in list)');
 INSERT INTO quiz_options (quiz_id, options)
-VALUES (5, 'do-while loop');
+VALUES (currval(pg_get_serial_sequence('quiz', 'id')), 'do-while loop');
 INSERT INTO quiz_answers (quiz_id, answers)
-VALUES (5, 1);
+VALUES (currval(pg_get_serial_sequence('quiz', 'id')), 1);
 
 -- kotlin extension functions
 INSERT INTO quiz (title, text)
 VALUES ('Kotlin Extension Functions', 'What is true about extension functions in Kotlin?');
 INSERT INTO quiz_options (quiz_id, options)
-VALUES (6, 'They modify the original class');
+VALUES (currval(pg_get_serial_sequence('quiz', 'id')), 'They modify the original class');
 INSERT INTO quiz_options (quiz_id, options)
-VALUES (6, 'They add functionality without modifying the class');
+VALUES (currval(pg_get_serial_sequence('quiz', 'id')), 'They add functionality without modifying the class');
 INSERT INTO quiz_options (quiz_id, options)
-VALUES (6, 'They can only be private');
+VALUES (currval(pg_get_serial_sequence('quiz', 'id')), 'They can only be private');
 INSERT INTO quiz_options (quiz_id, options)
-VALUES (6, 'They replace existing methods');
+VALUES (currval(pg_get_serial_sequence('quiz', 'id')), 'They replace existing methods');
 INSERT INTO quiz_answers (quiz_id, answers)
-VALUES (6, 1);
+VALUES (currval(pg_get_serial_sequence('quiz', 'id')), 1);
 
 -- kotlin collections
 INSERT INTO quiz (title, text)
 VALUES ('Kotlin Collections', 'Which Kotlin function filters elements in a collection?');
 INSERT INTO quiz_options (quiz_id, options)
-VALUES (7, 'map()');
+VALUES (currval(pg_get_serial_sequence('quiz', 'id')), 'map()');
 INSERT INTO quiz_options (quiz_id, options)
-VALUES (7, 'filter()');
+VALUES (currval(pg_get_serial_sequence('quiz', 'id')), 'filter()');
 INSERT INTO quiz_options (quiz_id, options)
-VALUES (7, 'reduce()');
+VALUES (currval(pg_get_serial_sequence('quiz', 'id')), 'reduce()');
 INSERT INTO quiz_options (quiz_id, options)
-VALUES (7, 'forEach()');
+VALUES (currval(pg_get_serial_sequence('quiz', 'id')), 'forEach()');
 INSERT INTO quiz_answers (quiz_id, answers)
-VALUES (7, 1);
+VALUES (currval(pg_get_serial_sequence('quiz', 'id')), 1);
 
 -- kotlin coroutines
 INSERT INTO quiz (title, text)
 VALUES ('Kotlin Coroutines', 'Which keyword is used to define a coroutine scope in Kotlin?');
 INSERT INTO quiz_options (quiz_id, options)
-VALUES (8, 'async');
+VALUES (currval(pg_get_serial_sequence('quiz', 'id')), 'async');
 INSERT INTO quiz_options (quiz_id, options)
-VALUES (8, 'launch');
+VALUES (currval(pg_get_serial_sequence('quiz', 'id')), 'launch');
 INSERT INTO quiz_options (quiz_id, options)
-VALUES (8, 'suspend');
+VALUES (currval(pg_get_serial_sequence('quiz', 'id')), 'suspend');
 INSERT INTO quiz_options (quiz_id, options)
-VALUES (8, 'coroutine');
+VALUES (currval(pg_get_serial_sequence('quiz', 'id')), 'coroutine');
 INSERT INTO quiz_answers (quiz_id, answers)
-VALUES (8, 2);
+VALUES (currval(pg_get_serial_sequence('quiz', 'id')), 2);
 
 -- kotlin lambdas
 INSERT INTO quiz (title, text)
 VALUES ('Kotlin Lambdas', 'What is the syntax for a lambda expression in Kotlin?');
 INSERT INTO quiz_options (quiz_id, options)
-VALUES (9, '{ x -> x * 2 }');
+VALUES (currval(pg_get_serial_sequence('quiz', 'id')), '{ x -> x * 2 }');
 INSERT INTO quiz_options (quiz_id, options)
-VALUES (9, '(x) => x * 2');
+VALUES (currval(pg_get_serial_sequence('quiz', 'id')), '(x) => x * 2');
 INSERT INTO quiz_options (quiz_id, options)
-VALUES (9, 'lambda x: x * 2');
+VALUES (currval(pg_get_serial_sequence('quiz', 'id')), 'lambda x: x * 2');
 INSERT INTO quiz_options (quiz_id, options)
-VALUES (9, 'function(x) { x * 2 }');
+VALUES (currval(pg_get_serial_sequence('quiz', 'id')), 'function(x) { x * 2 }');
 INSERT INTO quiz_answers (quiz_id, answers)
-VALUES (9, 0);
+VALUES (currval(pg_get_serial_sequence('quiz', 'id')), 0);
 
 -- kotlin sealed classes
 INSERT INTO quiz (title, text)
 VALUES ('Kotlin Sealed Classes', 'What is a sealed class used for in Kotlin?');
 INSERT INTO quiz_options (quiz_id, options)
-VALUES (10, 'To prevent instantiation');
+VALUES (currval(pg_get_serial_sequence('quiz', 'id')), 'To prevent instantiation');
 INSERT INTO quiz_options (quiz_id, options)
-VALUES (10, 'To restrict class hierarchy');
+VALUES (currval(pg_get_serial_sequence('quiz', 'id')), 'To restrict class hierarchy');
 INSERT INTO quiz_options (quiz_id, options)
-VALUES (10, 'To allow multiple inheritance');
+VALUES (currval(pg_get_serial_sequence('quiz', 'id')), 'To allow multiple inheritance');
 INSERT INTO quiz_options (quiz_id, options)
-VALUES (10, 'To make classes immutable');
-INSERT INTO quiz_answers (quiz_id, answers) VALUES (10, 1);
+VALUES (currval(pg_get_serial_sequence('quiz', 'id')), 'To make classes immutable');
+INSERT INTO quiz_answers (quiz_id, answers)
+VALUES (currval(pg_get_serial_sequence('quiz', 'id')), 1);

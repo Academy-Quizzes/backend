@@ -13,8 +13,8 @@ spring:
 
   datasource:
     url: jdbc:postgresql://localhost:5432/quizdb
-    username: quiz_user
-    password: quiz_pass
+    username:
+    password: 
     driver-class-name: org.postgresql.Driver
 
   jpa:
