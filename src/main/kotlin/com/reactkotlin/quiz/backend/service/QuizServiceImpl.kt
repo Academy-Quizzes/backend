@@ -19,69 +19,54 @@ class QuizServiceImpl(private val quizRepository: QuizRepository) : QuizService 
         const val QUIZ_WRONG_MESSAGE = "Wrong answer! Please, try again."
     }
 
-    override fun getAll(): List<QuizRes> {
-        return quizRepository.findAll().map { it.toQuizRes() }
-    }
+    override fun getAll(): List<QuizRes> =
+        quizRepository.findAll().map { it.toQuizRes() }
 
-
-    override fun getById(id: Int): QuizRes {
-        return quizRepository.findById(id)?.toQuizRes()
-            ?: throw IllegalArgumentException("Quiz with id=${id} not found")
-
-    }
+    override fun getById(id: Long): QuizRes =
+        quizRepository.findById(id)
+            .map { it.toQuizRes() }
+            .orElseThrow { IllegalArgumentException("Quiz with id=$id not found") }
 
     @Transactional
     override fun add(quiz: QuizReq): QuizResFull {
-
-        val newQuiz = Quiz.create(
-            quiz.title,
-            quiz.text,
-            quiz.options,
-            quiz.answers
+        val newQuiz = Quiz(
+            title = quiz.title,
+            text = quiz.text,
+            options = quiz.options,
+            answers = quiz.answers
         )
-
-        return quizRepository.add(newQuiz).toQuizFullRes()
-
+        return quizRepository.save(newQuiz).toQuizFullRes()
     }
 
-
     @Transactional
-    override fun update(
-        quizId: Int,
-        quiz: QuizReq
-    ){
-        val getQuiz = quizRepository.findById(quizId)
-            ?: throw IllegalArgumentException("Quiz with id=${quizId} not found")
+    override fun update(quizId: Long, quiz: QuizReq) {
+        val existingQuiz = quizRepository.findById(quizId)
+            .orElseThrow { IllegalArgumentException("Quiz with id=$quizId not found") }
 
-        getQuiz.title = quiz.title
-        getQuiz.text = quiz.text
-        getQuiz.options = quiz.options
-        getQuiz.answers = quiz.answers
+        existingQuiz.title = quiz.title
+        existingQuiz.text = quiz.text
+        existingQuiz.options = quiz.options
+        existingQuiz.answers = quiz.answers
 
-      quizRepository.update(getQuiz)
-
+        quizRepository.save(existingQuiz) // save handles update
     }
 
-
-
     @Transactional
-    override fun delete(id: Int) {
-
-        quizRepository.findById(id)
-            ?: throw IllegalArgumentException("Quiz with id=${id} not found")
-
+    override fun delete(id: Long) {
+        if (!quizRepository.existsById(id)) {
+            throw IllegalArgumentException("Quiz with id=$id not found")
+        }
         quizRepository.deleteById(id)
-
     }
 
 
 
     override fun solve(
-
-        id: Int,
+        id: Long,
         userAnswers: List<Int>
     ): QuizAnswerRes {
-        val quiz = quizRepository.findById(id) ?: throw IllegalArgumentException("Quiz with id=${id} not found")
+        val quiz = quizRepository.findById(id)
+            .orElseThrow { IllegalArgumentException("Quiz with id=$id not found") }
 
         val isCorrect = isQuizSolved(quiz, userAnswers)
 

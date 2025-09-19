@@ -30,7 +30,7 @@ class QuizController(private val quizService: QuizService) {
 
 
     @GetMapping("/quizzes/{quizId}")
-    fun getQuiz(@PathVariable quizId: Int): ResponseEntity<QuizRes> {
+    fun getQuiz(@PathVariable quizId: Long): ResponseEntity<QuizRes> {
         return try {
             ResponseEntity.ok(quizService.getById(quizId))
         } catch (e: IllegalArgumentException) {
@@ -50,7 +50,7 @@ class QuizController(private val quizService: QuizService) {
 
 
     @PostMapping("/quizzes/{quizId}/solve")
-    fun solveQuiz(@PathVariable quizId: Int, @RequestBody quizAnswer: QuizAnswerReq): ResponseEntity<QuizAnswerRes> {
+    fun solveQuiz(@PathVariable quizId: Long, @RequestBody quizAnswer: QuizAnswerReq): ResponseEntity<QuizAnswerRes> {
 
         val answer = quizService.solve(quizId, quizAnswer.answers)
 
@@ -59,7 +59,7 @@ class QuizController(private val quizService: QuizService) {
     }
 
     @DeleteMapping("/quizzes/{quizId}")
-    fun deleteQuiz(@PathVariable quizId: Int): ResponseEntity<Unit> {
+    fun deleteQuiz(@PathVariable quizId: Long): ResponseEntity<Unit> {
 
         return try {
 
@@ -73,7 +73,7 @@ class QuizController(private val quizService: QuizService) {
 
 
     @PutMapping("/quizzes/{id}")
-    fun updateQuiz(@PathVariable id: Int,@Valid @RequestBody quiz: QuizReq): ResponseEntity<Unit> {
+    fun updateQuiz(@PathVariable id: Long,@Valid @RequestBody quiz: QuizReq): ResponseEntity<Unit> {
 
         return try {
 
