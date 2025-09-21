@@ -13,7 +13,7 @@ data class QuizReq(
     val text: String,
     @field:Size(min = 2, max = 4)
     val options: List<String>,
-
+    @field:Size(min = 1)
     val answers: List<Int>
 
 )

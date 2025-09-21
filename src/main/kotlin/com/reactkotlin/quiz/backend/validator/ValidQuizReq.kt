@@ -52,10 +52,10 @@ class QuizReqValidator : ConstraintValidator<ValidQuizReq, QuizReq> {
             return false
         }
 
-        // rule 4 answers cannot be null
+        // rule 4 answers cannot be empty
         if (answers.isEmpty()) {
             context.disableDefaultConstraintViolation()
-            context.buildConstraintViolationWithTemplate("Answers cannot be null")
+            context.buildConstraintViolationWithTemplate("Answers cannot be empty")
                 .addPropertyNode("answers")
                 .addConstraintViolation()
             return false
