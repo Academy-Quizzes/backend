@@ -31,58 +31,34 @@ class QuizController(private val quizService: QuizService) {
 
     @GetMapping("/quizzes/{quizId}")
     fun getQuiz(@PathVariable quizId: Long): ResponseEntity<QuizRes> {
-        return try {
-            ResponseEntity.ok(quizService.getById(quizId))
-        } catch (e: IllegalArgumentException) {
-            ResponseEntity.notFound().build()
-        }
+        return ResponseEntity.ok(quizService.getById(quizId))
     }
 
 
     @PostMapping("/quizzes")
     fun addQuiz(@Valid @RequestBody quiz: QuizReq): ResponseEntity<QuizResFull> {
         val added = quizService.add(quiz)
-        return try { ResponseEntity.status(HttpStatus.CREATED).body(added)
-        } catch (e: IllegalArgumentException) {
-            ResponseEntity.badRequest().build()
-        }
+        return ResponseEntity.status(HttpStatus.CREATED).body(added)
     }
 
 
     @PostMapping("/quizzes/{quizId}/solve")
     fun solveQuiz(@PathVariable quizId: Long, @RequestBody quizAnswer: QuizAnswerReq): ResponseEntity<QuizAnswerRes> {
-
         val answer = quizService.solve(quizId, quizAnswer.answers)
-
         return ResponseEntity.status(HttpStatus.OK).body(answer)
-
     }
 
     @DeleteMapping("/quizzes/{quizId}")
     fun deleteQuiz(@PathVariable quizId: Long): ResponseEntity<Unit> {
-
-        return try {
-
-            quizService.delete(quizId)
-
-            ResponseEntity.noContent().build()
-        } catch (e: IllegalArgumentException) {
-            ResponseEntity.notFound().build()
-        }
+        quizService.delete(quizId)
+        return ResponseEntity.noContent().build()
     }
 
 
     @PutMapping("/quizzes/{id}")
-    fun updateQuiz(@PathVariable id: Long,@Valid @RequestBody quiz: QuizReq): ResponseEntity<Unit> {
-
-        return try {
-
-            quizService.update(id, quiz)
-            ResponseEntity.noContent().build()
-
-        } catch (e: IllegalArgumentException) {
-            ResponseEntity.notFound().build()
-        }
+    fun updateQuiz(@PathVariable id: Long, @Valid @RequestBody quiz: QuizReq): ResponseEntity<Unit> {
+        quizService.update(id, quiz)
+        return ResponseEntity.noContent().build()
     }
 
 }

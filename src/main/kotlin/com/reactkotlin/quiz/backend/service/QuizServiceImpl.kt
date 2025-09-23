@@ -7,6 +7,7 @@ import com.reactkotlin.quiz.backend.mapper.toQuizFullRes
 import com.reactkotlin.quiz.backend.mapper.toQuizRes
 import com.reactkotlin.quiz.backend.dto.QuizResFull
 import com.reactkotlin.quiz.backend.entity.Quiz
+import com.reactkotlin.quiz.backend.exception.QuizNotFoundException
 import com.reactkotlin.quiz.backend.repository.QuizRepository
 import jakarta.transaction.Transactional
 import org.springframework.stereotype.Service
@@ -25,7 +26,7 @@ class QuizServiceImpl(private val quizRepository: QuizRepository) : QuizService 
     override fun getById(id: Long): QuizRes =
         quizRepository.findById(id)
             .map { it.toQuizRes() }
-            .orElseThrow { IllegalArgumentException("Quiz with id=$id not found") }
+            .orElseThrow { QuizNotFoundException(id) }
 
     @Transactional
     override fun add(quiz: QuizReq): QuizResFull {
@@ -41,20 +42,20 @@ class QuizServiceImpl(private val quizRepository: QuizRepository) : QuizService 
     @Transactional
     override fun update(quizId: Long, quiz: QuizReq) {
         val existingQuiz = quizRepository.findById(quizId)
-            .orElseThrow { IllegalArgumentException("Quiz with id=$quizId not found") }
+            .orElseThrow { QuizNotFoundException(quizId) }
 
         existingQuiz.title = quiz.title
         existingQuiz.text = quiz.text
         existingQuiz.options = quiz.options
         existingQuiz.answers = quiz.answers
 
-        quizRepository.save(existingQuiz) // save handles update
+        quizRepository.save(existingQuiz)
     }
 
     @Transactional
     override fun delete(id: Long) {
         if (!quizRepository.existsById(id)) {
-            throw IllegalArgumentException("Quiz with id=$id not found")
+            QuizNotFoundException(id)
         }
         quizRepository.deleteById(id)
     }
@@ -66,7 +67,7 @@ class QuizServiceImpl(private val quizRepository: QuizRepository) : QuizService 
         userAnswers: List<Int>
     ): QuizAnswerRes {
         val quiz = quizRepository.findById(id)
-            .orElseThrow { IllegalArgumentException("Quiz with id=$id not found") }
+            .orElseThrow { QuizNotFoundException(id) }
 
         val isCorrect = isQuizSolved(quiz, userAnswers)
 
