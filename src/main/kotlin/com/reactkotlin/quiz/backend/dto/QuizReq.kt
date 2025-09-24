@@ -1,8 +1,10 @@
 package com.reactkotlin.quiz.backend.dto
 
+import com.reactkotlin.quiz.backend.validator.ValidQuizReq
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Size
 
+@ValidQuizReq
 data class QuizReq(
 
     @field:NotBlank
@@ -11,7 +13,7 @@ data class QuizReq(
     val text: String,
     @field:Size(min = 2, max = 4)
     val options: List<String>,
-    @field:Size(min = 1, max = 4)
+    @field:Size(min = 1)
     val answers: List<Int>
 
 )
