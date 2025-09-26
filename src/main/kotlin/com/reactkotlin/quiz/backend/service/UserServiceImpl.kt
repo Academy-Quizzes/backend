@@ -19,23 +19,19 @@ import org.springframework.web.server.ResponseStatusException
 class UserServiceImpl(
     private val userRepo: UserRepository,
     private val passwordEncoder: PasswordEncoder
-) : UserDetailsService {
+) : UserService {
     override fun loadUserByUsername(username: String?): UserDetails? =
         userRepo.findByEmail(username!!)?.let {
             UserDetailsImpl(
-                it.id!!,
-                it.email,
-                it.password,
-                listOf(SimpleGrantedAuthority("ROLE_USER")),
-                it.enabled,
+                it,
+                listOf(SimpleGrantedAuthority("ROLE_${it.role.name}"))
             )
         } ?: throw UsernameNotFoundException("User not found")
 
-    fun createUser(email: String, password: String): UserRes {
+    override fun createUser(email: String, password: String): UserRes {
         if (userRepo.existsByEmail(email)) {
             throw ResponseStatusException(HttpStatus.BAD_REQUEST, "User with email=$email already exists")
         }
-        val defaultRole = Role.USER.name
         val savedUser = userRepo.save(
             User(
                 email = email,

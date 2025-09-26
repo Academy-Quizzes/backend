@@ -10,10 +10,11 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 import com.reactkotlin.quiz.backend.dto.UserRes
+import com.reactkotlin.quiz.backend.service.UserService
 
 @RestController
 class UserController (
-    private val userService : UserServiceImpl
+    private val userService : UserService
 ){
     private val log = LoggerFactory.getLogger(UserController::class.java)
 
