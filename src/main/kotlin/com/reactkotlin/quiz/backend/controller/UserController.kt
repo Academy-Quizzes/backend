@@ -20,7 +20,7 @@ class UserController (
 
     @PostMapping("/api/register")
     fun register(@Valid @RequestBody req: RegisterUserReq): ResponseEntity<Any> {
-        log.info("Register user: $req")
+        log.info("Register user: $req.email")
         val user = userService.createUser(
             email = req.email,
             password = req.password
