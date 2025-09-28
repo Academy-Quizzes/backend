@@ -12,8 +12,8 @@ import jakarta.persistence.Table
 
 
 @Entity
-@Table(name = "quiz")
-class Quiz(
+@Table(name = "question")
+class Question(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null,
@@ -25,12 +25,12 @@ class Quiz(
     var text: String,
 
     @ElementCollection
-    @CollectionTable(name = "quiz_options", joinColumns = [JoinColumn(name = "quiz_id")])
+    @CollectionTable(name = "question_options", joinColumns = [JoinColumn(name = "question_id")])
     @Column(name = "options")
     var options: List<String> = listOf(),
 
     @ElementCollection
-    @CollectionTable(name = "quiz_answers", joinColumns = [JoinColumn(name = "quiz_id")])
+    @CollectionTable(name = "question_answers", joinColumns = [JoinColumn(name = "question_id")])
     @Column(name = "answers")
     var answers: List<Int> = listOf()
 )
