@@ -14,6 +14,8 @@ data class QuestionReq(
     @field:Size(min = 2, max = 4)
     val options: List<String>,
     @field:Size(min = 1)
-    val answers: List<Int>
+    val answers: List<Int>,
+    @field:Size(min = 1)
+    val topicIds: List<Long>
 
 )

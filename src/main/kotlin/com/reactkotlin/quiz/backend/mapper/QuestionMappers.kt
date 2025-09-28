@@ -4,6 +4,17 @@ import com.reactkotlin.quiz.backend.dto.QuestionRes
 import com.reactkotlin.quiz.backend.dto.QuestionResFull
 import com.reactkotlin.quiz.backend.entity.Question
 
-fun Question.toQuestionRes(): QuestionRes = QuestionRes(id!!, title, text, options)
+fun Question.toQuestionRes(): QuestionRes = QuestionRes(
+    id!!,
+    title,
+    text,
+    options,
+    topics.map { it.name })
 
-fun Question.toQuestionFullRes(): QuestionResFull = QuestionResFull(id!!, title, text, options, answers)
+fun Question.toQuestionFullRes(): QuestionResFull = QuestionResFull(
+    id!!,
+    title,
+    text,
+    options,
+    answers,
+    topics.map { it.name })
