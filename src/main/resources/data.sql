@@ -8,14 +8,6 @@ INSERT INTO topics (id, name) VALUES (2, 'Kotlin')
 INSERT INTO topics (id, name) VALUES (3, 'PostgreSQL')
     ON CONFLICT (id) DO NOTHING;
 
--- seed in roles
-INSERT INTO roles (id, name) VALUES (1, 'USER')
-    ON CONFLICT (id) DO NOTHING;
-INSERT INTO roles (id, name) VALUES (2, 'CREATOR')
-    ON CONFLICT (id) DO NOTHING;
-INSERT INTO roles (id, name) VALUES (3, 'ADMIN')
-    ON CONFLICT (id) DO NOTHING;
-
 -- kotlin variable declaration
 INSERT INTO question (title, text)
 VALUES ('Kotlin Variable Declaration', 'How do you declare a read-only integer variable in Kotlin?');
