@@ -6,5 +6,6 @@ data class QuestionResFull(
     val text: String,
     val options: List<String>,
     val answers: List<Int>,
-    val topics: List<String>
+    val topics: List<String>,
+    val creatorId: Long
 )

@@ -8,15 +8,22 @@ import com.reactkotlin.quiz.backend.mapper.toQuestionRes
 import com.reactkotlin.quiz.backend.dto.QuestionResFull
 import com.reactkotlin.quiz.backend.entity.Question
 import com.reactkotlin.quiz.backend.exception.QuestionNotFoundException
+import com.reactkotlin.quiz.backend.exception.UserNotFoundException
 import com.reactkotlin.quiz.backend.repository.QuestionRepository
 import com.reactkotlin.quiz.backend.repository.TopicRepository
+import com.reactkotlin.quiz.backend.repository.UserRepository
+import com.reactkotlin.quiz.backend.security.UserDetailsImpl
 import jakarta.transaction.Transactional
+import org.springframework.http.HttpStatus
+import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Service
+import org.springframework.web.server.ResponseStatusException
 
 @Service
 class QuestionServiceImpl(
     private val questionRepository: QuestionRepository,
-    private val topicRepository: TopicRepository
+    private val topicRepository: TopicRepository,
+    private val userRepository: UserRepository
 ) : QuestionService {
 
     companion object {
@@ -41,12 +48,31 @@ class QuestionServiceImpl(
             topicRepository.findAllById(question.topicIds).toMutableSet()
         }
 
+        val authentication = SecurityContextHolder.getContext().authentication
+
+        // this check as of now doesnt even get triggered
+        // because if not authenticated SPring Security
+        // will catch it and return 401 not authorized
+        // will leave this here till in future we add a
+        // custom additional filter for checking specific
+        // exceptions
+        if (authentication == null || !authentication.isAuthenticated || authentication.principal == "anonymousUser") {
+            throw ResponseStatusException(HttpStatus.UNAUTHORIZED, "User must be authenticated to create a question")
+        }
+
+        val userDetails = authentication.principal as? UserDetailsImpl
+            ?: throw IllegalArgumentException("Invalid user details in authentication context")
+
+        val creatorId = userDetails.getId()
+            ?: throw UserNotFoundException("User not found in Authentication Details")
+
         val newQuestion = Question(
             title = question.title,
             text = question.text,
             options = question.options,
             answers = question.answers,
-            topics = topics
+            topics = topics,
+            creatorId = creatorId
         )
         return questionRepository.save(newQuestion).toQuestionFullRes()
     }

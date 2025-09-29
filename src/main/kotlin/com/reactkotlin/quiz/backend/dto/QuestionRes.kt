@@ -5,5 +5,6 @@ data class QuestionRes(
     val title: String,
     val text: String,
     val options: List<String>,
-    val topics: List<String>
+    val topics: List<String>,
+    val creatorId: Long
 )

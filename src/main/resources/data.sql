@@ -9,8 +9,8 @@ INSERT INTO topics (id, name) VALUES (3, 'PostgreSQL')
     ON CONFLICT (id) DO NOTHING;
 
 -- kotlin variable declaration
-INSERT INTO question (title, text)
-VALUES ('Kotlin Variable Declaration', 'How do you declare a read-only integer variable in Kotlin?');
+INSERT INTO question (title, text, creator_id)
+VALUES ('Kotlin Variable Declaration', 'How do you declare a read-only integer variable in Kotlin?',1);
 INSERT INTO question_options (question_id, options)
 VALUES (currval(pg_get_serial_sequence('question', 'id')), 'val x: Int = 5');
 INSERT INTO question_options (question_id, options)
@@ -24,8 +24,8 @@ VALUES (currval(pg_get_serial_sequence('question', 'id')), 0);
 INSERT INTO question_topics (question_id, topic_id) VALUES (1, 1);
 
 -- kotlin null safety
-INSERT INTO question (title, text)
-VALUES ('Kotlin Null Safety', 'Which operator is used to safely access a nullable variable in Kotlin?');
+INSERT INTO question (title, text, creator_id)
+VALUES ('Kotlin Null Safety', 'Which operator is used to safely access a nullable variable in Kotlin?',1);
 INSERT INTO question_options (question_id, options)
 VALUES (currval(pg_get_serial_sequence('question', 'id')), '?.');
 INSERT INTO question_options (question_id, options)
@@ -41,8 +41,8 @@ VALUES (2,1);
 INSERT INTO question_topics (question_id, topic_id)
 VALUES (2,2);
 -- kotlin data classes
-INSERT INTO question (title, text)
-VALUES ('Kotlin Data Classes', 'What is automatically provided by a Kotlin data class?');
+INSERT INTO question (title, text, creator_id)
+VALUES ('Kotlin Data Classes', 'What is automatically provided by a Kotlin data class?',3);
 INSERT INTO question_options (question_id, options)
 VALUES (currval(pg_get_serial_sequence('question', 'id')), 'toString()');
 INSERT INTO question_options (question_id, options)
@@ -62,8 +62,8 @@ VALUES (3, 2);
 INSERT INTO question_topics (question_id, topic_id)
 VALUES (3, 3);
 -- kotlin functions
-INSERT INTO question (title, text)
-VALUES ('Kotlin Functions', 'Which keyword defines a function in Kotlin?');
+INSERT INTO question (title, text, creator_id)
+VALUES ('Kotlin Functions', 'Which keyword defines a function in Kotlin?',1);
 INSERT INTO question_options (question_id, options)
 VALUES (currval(pg_get_serial_sequence('question', 'id')), 'fun');
 INSERT INTO question_options (question_id, options)
@@ -77,8 +77,8 @@ VALUES (currval(pg_get_serial_sequence('question', 'id')), 0);
 INSERT INTO question_topics (question_id, topic_id)
 VALUES (4,1);
 -- kotlin loops
-INSERT INTO question (title, text)
-VALUES ('Kotlin Loops', 'Which Kotlin loop construct is best for iterating over a list with indices?');
+INSERT INTO question (title, text, creator_id)
+VALUES ('Kotlin Loops', 'Which Kotlin loop construct is best for iterating over a list with indices?',1);
 INSERT INTO question_options (question_id, options)
 VALUES (currval(pg_get_serial_sequence('question', 'id')), 'for (item in list)');
 INSERT INTO question_options (question_id, options)
@@ -92,8 +92,8 @@ VALUES (currval(pg_get_serial_sequence('question', 'id')), 1);
 INSERT INTO question_topics (question_id, topic_id)
 VALUES (5,1);
 -- kotlin extension functions
-INSERT INTO question (title, text)
-VALUES ('Kotlin Extension Functions', 'What is true about extension functions in Kotlin?');
+INSERT INTO question (title, text, creator_id)
+VALUES ('Kotlin Extension Functions', 'What is true about extension functions in Kotlin?',4);
 INSERT INTO question_options (question_id, options)
 VALUES (currval(pg_get_serial_sequence('question', 'id')), 'They modify the original class');
 INSERT INTO question_options (question_id, options)
@@ -107,8 +107,8 @@ VALUES (currval(pg_get_serial_sequence('question', 'id')), 1);
 INSERT INTO question_topics (question_id, topic_id)
 VALUES (6,1);
 -- kotlin collections
-INSERT INTO question (title, text)
-VALUES ('Kotlin Collections', 'Which Kotlin function filters elements in a collection?');
+INSERT INTO question (title, text, creator_id)
+VALUES ('Kotlin Collections', 'Which Kotlin function filters elements in a collection?',4);
 INSERT INTO question_options (question_id, options)
 VALUES (currval(pg_get_serial_sequence('question', 'id')), 'map()');
 INSERT INTO question_options (question_id, options)
@@ -122,8 +122,8 @@ VALUES (currval(pg_get_serial_sequence('question', 'id')), 1);
 INSERT INTO question_topics (question_id, topic_id)
 VALUES (7,1);
 -- kotlin coroutines
-INSERT INTO question (title, text)
-VALUES ('Kotlin Coroutines', 'Which keyword is used to define a coroutine scope in Kotlin?');
+INSERT INTO question (title, text, creator_id)
+VALUES ('Kotlin Coroutines', 'Which keyword is used to define a coroutine scope in Kotlin?',1);
 INSERT INTO question_options (question_id, options)
 VALUES (currval(pg_get_serial_sequence('question', 'id')), 'async');
 INSERT INTO question_options (question_id, options)
@@ -137,8 +137,8 @@ VALUES (currval(pg_get_serial_sequence('question', 'id')), 2);
 INSERT INTO question_topics (question_id, topic_id)
 VALUES (8,1);
 -- kotlin lambdas
-INSERT INTO question (title, text)
-VALUES ('Kotlin Lambdas', 'What is the syntax for a lambda expression in Kotlin?');
+INSERT INTO question (title, text, creator_id)
+VALUES ('Kotlin Lambdas', 'What is the syntax for a lambda expression in Kotlin?',3);
 INSERT INTO question_options (question_id, options)
 VALUES (currval(pg_get_serial_sequence('question', 'id')), '{ x -> x * 2 }');
 INSERT INTO question_options (question_id, options)
@@ -152,8 +152,8 @@ VALUES (currval(pg_get_serial_sequence('question', 'id')), 0);
 INSERT INTO question_topics (question_id, topic_id)
 VALUES (9,1);
 -- kotlin sealed classes
-INSERT INTO question (title, text)
-VALUES ('Kotlin Sealed Classes', 'What is a sealed class used for in Kotlin?');
+INSERT INTO question (title, text, creator_id)
+VALUES ('Kotlin Sealed Classes', 'What is a sealed class used for in Kotlin?',4);
 INSERT INTO question_options (question_id, options)
 VALUES (currval(pg_get_serial_sequence('question', 'id')), 'To prevent instantiation');
 INSERT INTO question_options (question_id, options)
