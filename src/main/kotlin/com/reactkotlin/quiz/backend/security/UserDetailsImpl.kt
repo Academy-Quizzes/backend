@@ -1,14 +1,16 @@
 package com.reactkotlin.quiz.backend.security
 import com.reactkotlin.quiz.backend.entity.User
+import com.reactkotlin.quiz.backend.entity.asGrantedAuthority
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 
 class UserDetailsImpl(
     private val user: User,
-    private val authorities: Collection<GrantedAuthority>
 ) : UserDetails {
 
-    override fun getAuthorities(): Collection<GrantedAuthority> = authorities
+    override fun getAuthorities(): Collection<GrantedAuthority> {
+        return listOf(user.role.asGrantedAuthority)
+    }
 
     override fun getUsername(): String = user.email
 
@@ -22,5 +24,5 @@ class UserDetailsImpl(
 
     override fun isCredentialsNonExpired(): Boolean = true
 
-    override fun isEnabled(): Boolean = true
+    override fun isEnabled(): Boolean = user.enabled
 }

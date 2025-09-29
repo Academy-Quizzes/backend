@@ -20,13 +20,6 @@ class UserServiceImpl(
     private val userRepo: UserRepository,
     private val passwordEncoder: PasswordEncoder
 ) : UserService {
-    override fun loadUserByUsername(username: String?): UserDetails? =
-        userRepo.findByEmail(username!!)?.let {
-            UserDetailsImpl(
-                it,
-                listOf(SimpleGrantedAuthority("ROLE_${it.role.name}"))
-            )
-        } ?: throw UsernameNotFoundException("User not found")
 
     override fun createUser(email: String, password: String): UserRes {
         if (userRepo.existsByEmail(email)) {
@@ -44,6 +37,10 @@ class UserServiceImpl(
             email = savedUser.email,
             role = savedUser.role
         )
+    }
+
+    override fun findUserByEmail(email: String): User? {
+        return userRepo.findByEmail(email)
     }
 
 }

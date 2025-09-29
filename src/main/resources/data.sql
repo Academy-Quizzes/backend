@@ -1,5 +1,5 @@
 TRUNCATE TABLE quiz_options, quiz_answers, quiz RESTART IDENTITY CASCADE;
-
+TRUNCATE TABLE users RESTART IDENTITY CASCADE;
 -- kotlin variable declaration
 INSERT INTO quiz (title, text)
 VALUES ('Kotlin Variable Declaration', 'How do you declare a read-only integer variable in Kotlin?');
