@@ -9,7 +9,7 @@ class UserDetailsImpl(
 ) : UserDetails {
 
     override fun getAuthorities(): Collection<GrantedAuthority> {
-        return listOf(user.role.asGrantedAuthority)
+        return user.roles.map { it.asGrantedAuthority }
     }
 
     override fun getUsername(): String = user.email

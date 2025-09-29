@@ -1,17 +1,17 @@
 package com.reactkotlin.quiz.backend.entity
 
-import jakarta.persistence.CollectionTable
 import jakarta.persistence.Column
-import jakarta.persistence.ElementCollection
 import jakarta.persistence.Entity
-import jakarta.persistence.EnumType
-import jakarta.persistence.Enumerated
 import jakarta.persistence.FetchType
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.JoinColumn
+import jakarta.persistence.JoinTable
+import jakarta.persistence.ManyToMany
 import jakarta.persistence.Table
+import kotlin.collections.MutableSet
+
 @Entity
 @Table(name = "users")
 class User(
@@ -28,9 +28,13 @@ class User(
     @Column(nullable = false)
     var enabled: Boolean = true,
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    var role: Role = Role.USER
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+        name = "user_roles",
+        joinColumns = [JoinColumn(name = "user_id")],
+        inverseJoinColumns = [JoinColumn(name = "role_id")]
+    )
+    var roles: MutableSet<Role> = mutableSetOf(),
 
-)
+    )

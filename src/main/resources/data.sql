@@ -1,10 +1,20 @@
-TRUNCATE TABLE question_options, question_answers, question RESTART IDENTITY CASCADE;
-TRUNCATE TABLE topics RESTART IDENTITY CASCADE;
+-- resets users,roles,question_options ..etc and cascades
+TRUNCATE TABLE users,roles, question_options, question_answers, question_topics, question RESTART IDENTITY CASCADE;
+-- seed in topics
+INSERT INTO topics (id, name) VALUES (1, 'General')
+    ON CONFLICT (id) DO NOTHING;
+INSERT INTO topics (id, name) VALUES (2, 'Kotlin')
+    ON CONFLICT (id) DO NOTHING;
+INSERT INTO topics (id, name) VALUES (3, 'PostgreSQL')
+    ON CONFLICT (id) DO NOTHING;
 
--- default topic only one as of now for testing purposes
-INSERT INTO topics (name) VALUES ('General');
-INSERT INTO topics (name) VALUES ('Kotlin');
-INSERT INTO topics (name) VALUES ('PostgreSQL');
+-- seed in roles
+INSERT INTO roles (id, name) VALUES (1, 'USER')
+    ON CONFLICT (id) DO NOTHING;
+INSERT INTO roles (id, name) VALUES (2, 'CREATOR')
+    ON CONFLICT (id) DO NOTHING;
+INSERT INTO roles (id, name) VALUES (3, 'ADMIN')
+    ON CONFLICT (id) DO NOTHING;
 
 -- kotlin variable declaration
 INSERT INTO question (title, text)

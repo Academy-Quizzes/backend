@@ -35,7 +35,7 @@ class UserController (
         val response = UserRes(
             id = user.id,
             email = user.email,
-            role = user.role
+            roles = user.roles
         )
         return ResponseEntity.status(HttpStatus.CREATED).body(response)
     }
@@ -53,7 +53,7 @@ class UserController (
         val userRes = mapOf(
             "id" to (userDetails as UserDetailsImpl).getId(),
             "email" to userDetails.username,
-            "role" to userDetails.authorities.first().authority.replace("ROLE_", "")
+            "roles" to userDetails.authorities.map { it.authority.removePrefix("ROLE_") }
         )
         return ResponseEntity.ok(mapOf("token" to jwtToken, "user" to userRes))
     }
