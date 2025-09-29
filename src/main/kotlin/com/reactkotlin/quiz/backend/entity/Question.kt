@@ -47,5 +47,5 @@ class Question(
     var topics: MutableSet<Topic> = mutableSetOf(),
 
     @JoinColumn(name = "creator_id", nullable = false)
-    var creatorId:Long? = null
+    var creatorId:Long
 )
