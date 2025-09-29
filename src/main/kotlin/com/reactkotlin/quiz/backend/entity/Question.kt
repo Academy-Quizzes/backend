@@ -11,6 +11,7 @@ import jakarta.persistence.Id
 import jakarta.persistence.JoinColumn
 import jakarta.persistence.JoinTable
 import jakarta.persistence.ManyToMany
+import jakarta.persistence.ManyToOne
 import jakarta.persistence.Table
 
 
@@ -43,5 +44,8 @@ class Question(
         joinColumns = [JoinColumn(name = "question_id")],
         inverseJoinColumns = [JoinColumn(name = "topic_id")]
     )
-    var topics: MutableSet<Topic> = mutableSetOf()
+    var topics: MutableSet<Topic> = mutableSetOf(),
+
+    @JoinColumn(name = "creator_id", nullable = false)
+    var creatorId:Long? = null
 )

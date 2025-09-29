@@ -9,7 +9,9 @@ fun Question.toQuestionRes(): QuestionRes = QuestionRes(
     title,
     text,
     options,
-    topics.map { it.name })
+    topics.map { it.name },
+    creatorId!!
+)
 
 fun Question.toQuestionFullRes(): QuestionResFull = QuestionResFull(
     id!!,
@@ -17,4 +19,6 @@ fun Question.toQuestionFullRes(): QuestionResFull = QuestionResFull(
     text,
     options,
     answers,
-    topics.map { it.name })
+    topics.map { it.name },
+    creatorId!!
+)
