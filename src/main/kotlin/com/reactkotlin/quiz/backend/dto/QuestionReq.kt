@@ -1,11 +1,11 @@
 package com.reactkotlin.quiz.backend.dto
 
-import com.reactkotlin.quiz.backend.validator.ValidQuizReq
+import com.reactkotlin.quiz.backend.validator.ValidQuestionReq
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Size
 
-@ValidQuizReq
-data class QuizReq(
+@ValidQuestionReq
+data class QuestionReq(
 
     @field:NotBlank
     val title: String,

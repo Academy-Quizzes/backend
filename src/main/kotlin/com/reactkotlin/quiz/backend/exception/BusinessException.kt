@@ -1,5 +1,5 @@
 package com.reactkotlin.quiz.backend.exception
 
 
-class QuizNotFoundException(val quizId: Long) : RuntimeException()
+class QuestionNotFoundException(val questionId: Long) : RuntimeException()
 

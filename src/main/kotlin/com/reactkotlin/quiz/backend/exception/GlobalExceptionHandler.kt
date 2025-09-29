@@ -12,12 +12,12 @@ import org.springframework.web.bind.MethodArgumentNotValidException
 @RestControllerAdvice
 class GlobalExceptionHandler {
 
-    @ExceptionHandler(QuizNotFoundException::class)
-    fun handleQuizNotFound(ex: QuizNotFoundException, request: HttpServletRequest): ResponseEntity<ErrorDto> {
+    @ExceptionHandler(QuestionNotFoundException::class)
+    fun handleQuestionNotFound(ex: QuestionNotFoundException, request: HttpServletRequest): ResponseEntity<ErrorDto> {
         val error = ErrorDto(
             status = HttpStatus.NOT_FOUND.value(),
             error = HttpStatus.NOT_FOUND.reasonPhrase,
-            message = "Quiz with given id not found:${ex.quizId}",
+            message = "Question with given id not found:${ex.questionId}",
             path = request.requestURI
         )
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error)

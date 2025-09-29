@@ -1,6 +1,6 @@
 package com.reactkotlin.quiz.backend.validator
 
-import com.reactkotlin.quiz.backend.dto.QuizReq
+import com.reactkotlin.quiz.backend.dto.QuestionReq
 import jakarta.validation.Constraint
 import jakarta.validation.ConstraintValidator
 import jakarta.validation.ConstraintValidatorContext
@@ -9,16 +9,16 @@ import kotlin.reflect.KClass
 
 @Target(AnnotationTarget.CLASS)
 @Retention(AnnotationRetention.RUNTIME)
-@Constraint(validatedBy = [QuizReqValidator::class])
-annotation class ValidQuizReq(
-    val message: String = "Invalid quiz request",
+@Constraint(validatedBy = [QuestionReqValidator::class])
+annotation class ValidQuestionReq(
+    val message: String = "Invalid question request",
     val groups: Array<KClass<*>> = [],
     val payload: Array<KClass<out Payload>> = []
 )
 
-class QuizReqValidator : ConstraintValidator<ValidQuizReq, QuizReq> {
+class QuestionReqValidator : ConstraintValidator<ValidQuestionReq, QuestionReq> {
 
-    override fun isValid(value: QuizReq?, context: ConstraintValidatorContext): Boolean {
+    override fun isValid(value: QuestionReq?, context: ConstraintValidatorContext): Boolean {
         if (value == null) return true
 
         val optionsSize = value.options.size
