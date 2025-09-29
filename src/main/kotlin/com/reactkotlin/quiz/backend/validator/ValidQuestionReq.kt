@@ -1,10 +1,12 @@
 package com.reactkotlin.quiz.backend.validator
 
 import com.reactkotlin.quiz.backend.dto.QuestionReq
+import com.reactkotlin.quiz.backend.repository.TopicRepository
 import jakarta.validation.Constraint
 import jakarta.validation.ConstraintValidator
 import jakarta.validation.ConstraintValidatorContext
 import jakarta.validation.Payload
+import org.springframework.stereotype.Component
 import kotlin.reflect.KClass
 
 @Target(AnnotationTarget.CLASS)
@@ -16,7 +18,10 @@ annotation class ValidQuestionReq(
     val payload: Array<KClass<out Payload>> = []
 )
 
-class QuestionReqValidator : ConstraintValidator<ValidQuestionReq, QuestionReq> {
+@Component
+class QuestionReqValidator(
+    private val topicRepository: TopicRepository,
+) : ConstraintValidator<ValidQuestionReq, QuestionReq> {
 
     override fun isValid(value: QuestionReq?, context: ConstraintValidatorContext): Boolean {
         if (value == null) return true
@@ -57,6 +62,25 @@ class QuestionReqValidator : ConstraintValidator<ValidQuestionReq, QuestionReq> 
             context.disableDefaultConstraintViolation()
             context.buildConstraintViolationWithTemplate("Answers cannot be empty")
                 .addPropertyNode("answers")
+                .addConstraintViolation()
+            return false
+        }
+
+        // rule 5: topicIds must not be empty
+        if (value.topicIds.isEmpty()) {
+            context.disableDefaultConstraintViolation()
+            context.buildConstraintViolationWithTemplate("At least one topic must be specified")
+                .addPropertyNode("topicIds")
+                .addConstraintViolation()
+            return false
+        }
+
+        // rule 6: all topic ids must exist in db
+        val foundTopics = topicRepository.findAllById(value.topicIds)
+        if (foundTopics.size != value.topicIds.distinct().size) {
+            context.disableDefaultConstraintViolation()
+            context.buildConstraintViolationWithTemplate("Some topicIds do not exist: ${value.topicIds}")
+                .addPropertyNode("topicIds")
                 .addConstraintViolation()
             return false
         }

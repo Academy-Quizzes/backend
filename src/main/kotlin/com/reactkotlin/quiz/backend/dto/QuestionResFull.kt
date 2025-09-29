@@ -5,5 +5,6 @@ data class QuestionResFull(
     val title: String,
     val text: String,
     val options: List<String>,
-    val answers: List<Int>
+    val answers: List<Int>,
+    val topics: List<String>
 )
