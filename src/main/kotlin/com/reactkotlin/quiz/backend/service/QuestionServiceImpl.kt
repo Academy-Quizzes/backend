@@ -8,6 +8,7 @@ import com.reactkotlin.quiz.backend.mapper.toQuestionRes
 import com.reactkotlin.quiz.backend.dto.QuestionResFull
 import com.reactkotlin.quiz.backend.entity.Question
 import com.reactkotlin.quiz.backend.exception.QuestionNotFoundException
+import com.reactkotlin.quiz.backend.exception.UserNotFoundException
 import com.reactkotlin.quiz.backend.repository.QuestionRepository
 import com.reactkotlin.quiz.backend.repository.TopicRepository
 import com.reactkotlin.quiz.backend.repository.UserRepository
@@ -63,7 +64,7 @@ class QuestionServiceImpl(
             ?: throw IllegalArgumentException("Invalid user details in authentication context")
 
         val creatorId = userDetails.getId()
-            ?: throw IllegalArgumentException("User ID not found in authentication details")
+            ?: throw UserNotFoundException("User not found in Authentication Details")
 
         val newQuestion = Question(
             title = question.title,
