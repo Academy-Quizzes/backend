@@ -168,3 +168,39 @@ INSERT INTO question_topics (question_id, topic_id)
 VALUES (10,1);
 INSERT INTO question_topics (question_id, topic_id)
 VALUES (10,2);
+
+--Quizzes
+INSERT INTO quizzes (id, title, description, created_at, topic_id)
+VALUES (1, 'Introduction to Kotlin', 'Learn the basics of Kotlin, including variable declaration, null safety, and data classes', CURRENT_DATE, 2);
+
+INSERT INTO quiz_questions (quiz_id, question_id) VALUES (1, 1);
+INSERT INTO quiz_questions (quiz_id, question_id) VALUES (1, 2);
+INSERT INTO quiz_questions (quiz_id, question_id) VALUES (1, 3);
+
+INSERT INTO quizzes (id, title, description, created_at, topic_id)
+VALUES (2, 'Kotlin Functions and Loops', 'Get introduced to Kotlin functions and looping constructs.', CURRENT_DATE, 2);
+
+INSERT INTO quiz_questions (quiz_id, question_id) VALUES (2, 4);
+INSERT INTO quiz_questions (quiz_id, question_id) VALUES (2, 5);
+
+INSERT INTO quizzes (id, title, description, created_at, topic_id)
+VALUES (3, 'Advanced Kotlin Features', 'Explore advanced Kotlin features including extension functions, collections, and coroutines.', CURRENT_DATE, 2);
+
+INSERT INTO quiz_questions (quiz_id, question_id) VALUES (3, 6);
+INSERT INTO quiz_questions (quiz_id, question_id) VALUES (3, 7);
+INSERT INTO quiz_questions (quiz_id, question_id) VALUES (3, 8);
+
+INSERT INTO quizzes (id, title, description, created_at, topic_id)
+VALUES (4, 'Functional Programming in Kotlin', 'Dive into Kotlin’s functional programming capabilities such as lambdas and sealed classes.', CURRENT_DATE, 2);
+
+INSERT INTO quiz_questions (quiz_id, question_id) VALUES (4, 9);
+INSERT INTO quiz_questions (quiz_id, question_id) VALUES (4, 10);
+
+INSERT INTO quizzes (id, title, description, created_at, topic_id)
+VALUES (5, 'Comprehensive Kotlin Knowledge', 'Test your overall knowledge of Kotlin with a mix of questions.', CURRENT_DATE, 2);
+
+INSERT INTO quiz_questions (quiz_id, question_id) VALUES (5, 1);
+INSERT INTO quiz_questions (quiz_id, question_id) VALUES (5, 2);
+INSERT INTO quiz_questions (quiz_id, question_id) VALUES (5, 4);
+INSERT INTO quiz_questions (quiz_id, question_id) VALUES (5, 6);
+INSERT INTO quiz_questions (quiz_id, question_id) VALUES (5, 9);
