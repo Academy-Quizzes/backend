@@ -1,5 +1,5 @@
 -- resets users,roles,question_options ..etc and cascades
-TRUNCATE TABLE users,roles, question_options, question_answers, question_topics, question RESTART IDENTITY CASCADE;
+TRUNCATE TABLE users,roles, question_options, question_answers, question_topics, question, quizzes RESTART IDENTITY CASCADE;
 -- seed in topics
 INSERT INTO topics (id, name) VALUES (1, 'General')
     ON CONFLICT (id) DO NOTHING;
@@ -168,3 +168,76 @@ INSERT INTO question_topics (question_id, topic_id)
 VALUES (10,1);
 INSERT INTO question_topics (question_id, topic_id)
 VALUES (10,2);
+
+--Quizzes
+INSERT INTO quizzes (title, description, created_at, topic_id)
+VALUES ('Introduction to Kotlin', 'Learn the basics of Kotlin, including variable declaration, null safety, and data classes', CURRENT_DATE, 2);
+
+INSERT INTO quiz_questions (quiz_id, question_id)
+VALUES (currval(pg_get_serial_sequence('quizzes', 'id')), 1);
+INSERT INTO quiz_questions (quiz_id, question_id)
+VALUES (currval(pg_get_serial_sequence('quizzes', 'id')), 2);
+INSERT INTO quiz_questions (quiz_id, question_id)
+VALUES (currval(pg_get_serial_sequence('quizzes', 'id')), 3);
+
+INSERT INTO quizzes (title, description, created_at, topic_id)
+VALUES ('Kotlin Functions and Loops', 'Get introduced to Kotlin functions and looping constructs.', CURRENT_DATE, 2);
+
+INSERT INTO quiz_questions (quiz_id, question_id)
+VALUES (currval(pg_get_serial_sequence('quizzes', 'id')), 4);
+INSERT INTO quiz_questions (quiz_id, question_id)
+VALUES (currval(pg_get_serial_sequence('quizzes', 'id')), 5);
+
+INSERT INTO quizzes (title, description, created_at, topic_id)
+VALUES ('Advanced Kotlin Features', 'Explore advanced Kotlin features including extension functions, collections, and coroutines.', CURRENT_DATE, 2);
+
+INSERT INTO quiz_questions (quiz_id, question_id)
+VALUES (currval(pg_get_serial_sequence('quizzes', 'id')), 6);
+INSERT INTO quiz_questions (quiz_id, question_id)
+VALUES (currval(pg_get_serial_sequence('quizzes', 'id')), 7);
+INSERT INTO quiz_questions (quiz_id, question_id)
+VALUES (currval(pg_get_serial_sequence('quizzes', 'id')), 8);
+
+INSERT INTO quizzes (title, description, created_at, topic_id)
+VALUES ('Functional Programming in Kotlin', 'Dive into Kotlin’s functional programming capabilities such as lambdas and sealed classes.', CURRENT_DATE, 2);
+
+INSERT INTO quiz_questions (quiz_id, question_id)
+VALUES (currval(pg_get_serial_sequence('quizzes', 'id')), 9);
+INSERT INTO quiz_questions (quiz_id, question_id)
+VALUES (currval(pg_get_serial_sequence('quizzes', 'id')), 10);
+
+INSERT INTO quizzes (title, description, created_at, topic_id)
+VALUES ('Comprehensive Kotlin Knowledge', 'Test your overall knowledge of Kotlin with a mix of questions.', CURRENT_DATE, 2);
+
+INSERT INTO quiz_questions (quiz_id, question_id)
+VALUES (currval(pg_get_serial_sequence('quizzes', 'id')), 1);
+INSERT INTO quiz_questions (quiz_id, question_id)
+VALUES (currval(pg_get_serial_sequence('quizzes', 'id')), 2);
+INSERT INTO quiz_questions (quiz_id, question_id)
+VALUES (currval(pg_get_serial_sequence('quizzes', 'id')), 4);
+INSERT INTO quiz_questions (quiz_id, question_id)
+VALUES (currval(pg_get_serial_sequence('quizzes', 'id')), 6);
+INSERT INTO quiz_questions (quiz_id, question_id)
+VALUES (currval(pg_get_serial_sequence('quizzes', 'id')), 9);
+
+-- Quiz 6: Exploring Kotlin Classes
+INSERT INTO quizzes (title, description, created_at, topic_id)
+VALUES ('Exploring Kotlin Classes', 'Learn about class declarations, inheritance, and companion objects in Kotlin.', CURRENT_DATE, 2);
+
+-- Questions associated with Quiz 6
+INSERT INTO quiz_questions (quiz_id, question_id)
+VALUES (currval(pg_get_serial_sequence('quizzes', 'id')), 3); -- Kotlin Data Classes
+INSERT INTO quiz_questions (quiz_id, question_id)
+VALUES (currval(pg_get_serial_sequence('quizzes', 'id')), 10); -- Kotlin Sealed Classes
+
+-- Quiz 7: Kotlin Best Practices
+INSERT INTO quizzes (title, description, created_at, topic_id)
+VALUES ('Kotlin Best Practices', 'Test your knowledge of Kotlin coding conventions and efficient Kotlin usage.', CURRENT_DATE, 2);
+
+-- Questions associated with Quiz 7
+INSERT INTO quiz_questions (quiz_id, question_id)
+VALUES (currval(pg_get_serial_sequence('quizzes', 'id')), 1); -- Kotlin Variable Declaration
+INSERT INTO quiz_questions (quiz_id, question_id)
+VALUES (currval(pg_get_serial_sequence('quizzes', 'id')), 9); -- Kotlin Lambdas
+INSERT INTO quiz_questions (quiz_id, question_id)
+VALUES (currval(pg_get_serial_sequence('quizzes', 'id')), 6); -- Kotlin Extension Functions

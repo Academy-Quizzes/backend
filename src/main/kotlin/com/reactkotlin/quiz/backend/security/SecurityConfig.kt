@@ -71,9 +71,16 @@ class SecurityConfig() {
                     .requestMatchers(HttpMethod.POST, "/api/refresh-token").permitAll()
                     .requestMatchers(HttpMethod.POST, "/api/logout").permitAll()
                     .requestMatchers(HttpMethod.GET, "/api/questions").permitAll()
+                    .requestMatchers(HttpMethod.GET, "/api/quizzes").permitAll()
+                    .requestMatchers(HttpMethod.GET, "/api/quizzes/{quizId}").permitAll()
+                    .requestMatchers(HttpMethod.POST, "/api/quizzes").permitAll()
+                    .requestMatchers(HttpMethod.PUT, "/api/quizzes/{quizId}").permitAll()
+                    .requestMatchers(HttpMethod.DELETE, "/api/quizzes/{quizId}").permitAll()
+                    .requestMatchers(HttpMethod.POST, "/api/quizzes/{quizId}/questions").permitAll()
+
 //                    .requestMatchers(HttpMethod.POST, "/api/quizzes").hasAnyRole("CREATOR", "ADMIN")
 //                    .requestMatchers(HttpMethod.POST, "/api/quizzes").hasAuthority("ROLE_CREATOR")
-                    .anyRequest().authenticated()
+                    .anyRequest().permitAll()
             }
             .sessionManagement { it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter::class.java)
