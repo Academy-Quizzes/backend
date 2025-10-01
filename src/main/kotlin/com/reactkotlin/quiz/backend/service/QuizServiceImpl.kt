@@ -8,6 +8,8 @@ import com.reactkotlin.quiz.backend.mapper.toQuestionRes
 import com.reactkotlin.quiz.backend.repository.QuizRepository
 import com.reactkotlin.quiz.backend.repository.QuestionRepository
 import com.reactkotlin.quiz.backend.repository.TopicRepository
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.PageRequest
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -39,9 +41,11 @@ class QuizServiceImpl(
         return quiz.toQuizRes()
     }
 
-    override fun getAllQuizzes(): List<QuizRes> {
-        return quizRepository.findAll().map { it.toQuizRes() }
+    override fun getAllQuizzes(page: Int, size: Int): Page<QuizRes> {
+        val pageable = PageRequest.of(page, size)
+        return quizRepository.findAll(pageable).map { it.toQuizRes() }
     }
+
 
     @Transactional
     override fun addQuestionsToQuiz(quizId: Long, questionIds: List<Long>): QuizRes {

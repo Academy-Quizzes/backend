@@ -3,6 +3,7 @@ package com.reactkotlin.quiz.backend.controller
 import com.reactkotlin.quiz.backend.dto.QuizReq
 import com.reactkotlin.quiz.backend.dto.QuizRes
 import com.reactkotlin.quiz.backend.service.QuizService
+import org.springframework.data.domain.Page
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -26,9 +27,12 @@ class QuizController(
     }
 
     @GetMapping
-    fun getAllQuizzes(): ResponseEntity<List<QuizRes>> {
-        val quizzes = quizService.getAllQuizzes()
-        return ResponseEntity.ok(quizzes)
+    fun getAllQuizzes(
+        @RequestParam(defaultValue = "0") page: Int,
+        @RequestParam(defaultValue = "6") size: Int,
+    ): ResponseEntity<Page<QuizRes>> {
+        val quizPage = quizService.getAllQuizzes(page, size)
+        return ResponseEntity.ok(quizPage)
     }
 
     @PostMapping("/{quizId}/questions")

@@ -80,7 +80,7 @@ class SecurityConfig() {
 
 //                    .requestMatchers(HttpMethod.POST, "/api/quizzes").hasAnyRole("CREATOR", "ADMIN")
 //                    .requestMatchers(HttpMethod.POST, "/api/quizzes").hasAuthority("ROLE_CREATOR")
-                    .anyRequest().authenticated()
+                    .anyRequest().permitAll()
             }
             .sessionManagement { it.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
             .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter::class.java)
